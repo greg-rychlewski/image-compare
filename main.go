@@ -1,11 +1,12 @@
 package main
 
 import (
-	"fmt"
-	"os"
-	"io"
 	"flag"
+	"fmt"
+	"io"
+	"os"
 	"runtime"
+	"time"
 	"encoding/csv"
 )
 
@@ -18,8 +19,8 @@ var inputPath, outputPath string
 
 func init() {
 	// Initialize flag information
-	flag.StringVar(&inputPath, "in", "", "Path to input file. (REQUIRED)")
-	flag.StringVar(&outputPath,"out", "", "Path to output file. (REQUIRED)")
+	flag.StringVar(&inputPath, "in", "", "Path to the input csv. (REQUIRED)")
+	flag.StringVar(&outputPath,"out", "out_" + getCurrentTime(), "Path to output csv. If this is not specified, a time-stamped csv will be saved to the current directory.")
 	flag.BoolVar(&isVersionFlagPresent, "version", false, "Print version information.")
 }
 
@@ -74,6 +75,11 @@ func parseCSV(inputFile *os.File, outputFile *os.File) {
 	}
 }
 
+func getCurrentTime() string{
+	// Returns time in YYYYMMDDhhmmss format
+	return time.Now().Format("20060102150405")
+}
+
 func checkBreakingError(err error) {
 	if err != nil {
 		fmt.Println("(ERROR)", err)
@@ -92,8 +98,8 @@ func validateFlags() {
 		os.Exit(0)
 	}
 
-	// If user doesn't specify input and output paths, exit
-	if inputPath == "" || outputPath == "" {
+	// If user doesn't specify input path, exit
+	if inputPath == "" {
 		fmt.Printf("Usage of %s \n", os.Args[0])
 		flag.PrintDefaults()
 		os.Exit(1)
