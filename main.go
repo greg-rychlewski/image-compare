@@ -6,7 +6,6 @@ import (
 	"os"
 	"runtime"
 	"github.com/greg-rychlewski/image-compare/csvutil"
-	"github.com/greg-rychlewski/image-compare/errorutil"
 	"github.com/greg-rychlewski/image-compare/fileutil"
 )
 
@@ -19,15 +18,11 @@ var inputPath, outputPath string
 
 func init() {
 	// Get default output path 
-	defaultOutput, err := fileutil.GenerateOutputPath()
-
-	if err != nil {
-		errorutil.Exit(err)
-	}
+	defaultOutput := fileutil.GetDefaultOutputPath()
 
 	// Initialize flag information
 	flag.StringVar(&inputPath, "in", "", "Path to the input csv. (REQUIRED)")
-	flag.StringVar(&outputPath,"out", defaultOutput, "Path to output csv.")
+	flag.StringVar(&outputPath,"out", defaultOutput, "Path to output csv. If not provided, a time-stamped file will be generated in the current directory.")
 	flag.BoolVar(&isVersionFlagPresent, "version", false, "Print version information.")
 }
 
@@ -36,11 +31,22 @@ func main() {
 	flag.Parse()
 	validateFlags()
 
+	// Run main logic
+	err := run()
+
+	if err != nil {
+		fmt.Fprintln(os.Stderr, "(ERROR)", err)
+		os.Exit(1)
+	}
+
+}
+
+func run() error {
 	// Open input file
 	inputFile, err := os.Open(inputPath)
 
 	if err != nil {
-		errorutil.Exit(err)
+		return err
 	}
 
 	defer inputFile.Close()
@@ -49,14 +55,15 @@ func main() {
 	outputFile, err := os.OpenFile(outputPath, os.O_RDWR|os.O_CREATE|os.O_EXCL, 0644)
 
 	if err != nil {
-		inputFile.Close()
-		errorutil.Exit(err)
+		return err
 	}
 
 	defer outputFile.Close()
 
 	// Process input file
 	csvutil.Process(inputFile, outputFile)
+
+	return nil
 }
 
 func validateFlags() {
