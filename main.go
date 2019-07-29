@@ -37,6 +37,8 @@ func main() {
 		os.Remove(outputPath)
 		os.Exit(1)
 	}
+
+	fmt.Prinf("%s successfully created.", outputPath)
 }
 
 func run() error {
