@@ -38,7 +38,6 @@ func main() {
 		os.Exit(1)
 	}
 
-	fmt.Prinf("%s successfully created.", outputPath)
 }
 
 func run() error {
@@ -74,11 +73,14 @@ func run() error {
 	defer outputFile.Close()
 
 	// Process input file
-	err = csvutil.Process(inputFile, outputFile, !isNoHeaderFlagPresent)
+	numProcessedRows, err := csvutil.Process(inputFile, outputFile, !isNoHeaderFlagPresent)
 
 	if err != nil {
 		return err
 	}
+
+	fmt.Printf("%d image pairs successfully processed\n", numProcessedRows)
+	fmt.Printf("Output saved to %s", outputPath)
 
 	return nil
 }
