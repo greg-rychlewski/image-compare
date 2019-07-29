@@ -19,10 +19,11 @@ for OS in ${TARGET_OS}; do
       BINARY_FILE=${BINARY_FILE}.exe
     fi;
 
+    echo Building ${BINARY_FILE}
+
     GOOS=${OS} GOARCH=${ARCH} \
     go build \
       -o build/${BINARY_FILE}\
       -ldflags "-X 'main.goBuildVersion=${GO_VERSION}' -X main.buildTime=${BUILD_TIME_UTC} -X main.gitHash=${GIT_HASH} -X main.version=${APP_VERSION}"
   done
 done
-
