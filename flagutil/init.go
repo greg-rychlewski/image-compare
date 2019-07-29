@@ -6,7 +6,6 @@ import (
 )
 
 // Initialize command-line flag information
-
 func InitFlags(inputPathPtr *string, outputPathPtr *string, isVersionFlagPresentPtr *bool) {
 	defaultOutputPath := fileutil.GetDefaultOutputPath()
 

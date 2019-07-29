@@ -6,7 +6,6 @@ import (
 )
 
 // Create default output path if user doesn't specify one
-
 func GetDefaultOutputPath() string {
 	datetimeFormat := "20060102150405"
 

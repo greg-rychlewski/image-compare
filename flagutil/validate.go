@@ -1,7 +1,6 @@
 package flagutil
 
-// Custom error type so that flag errors can cause the program to print flag defaults
-
+// Custom error type so that flag errors can cause the program to print default flag values
 type FlagError struct {
 	s string
 }
@@ -11,7 +10,6 @@ func (e *FlagError) Error() string {
 }
 
 // Validate user input to command-line flags
-
 func ValidateInputPath(inputPath string) error {
 	if inputPath == "" {
 		return &FlagError{"Input path is missing"}

@@ -16,11 +16,9 @@ import (
 
 func MeanSquaredError(imagePath1 string, imagePath2 string) (float64, float64, error) {
 	// Get start time so that the elapsed time for the function run can be returned
-
 	start := time.Now()
 
 	// Open images and decode them
-
 	image1, err := os.Open(strings.TrimSpace(imagePath1))
 
 	if err != nil {
@@ -51,11 +49,9 @@ func MeanSquaredError(imagePath1 string, imagePath2 string) (float64, float64, e
 
 
 	// Resize images so that they are equal
-
 	imageData1, imageData2 = makeImageSizesEqual(imageData1, imageData2)
 
         // Calculate sum of squared errors
-
 	sse, err := sumSquaredErrors(imageData1, imageData2)
 
 	if err != nil {
@@ -70,13 +66,11 @@ func MeanSquaredError(imagePath1 string, imagePath2 string) (float64, float64, e
 
 func makeImageSizesEqual(image1 image.Image, image2 image.Image) (image.Image, image.Image) {
 	// If sizes are equal then return original images
-
 	if image1.Bounds().Max == image2.Bounds().Max {
 		return image1, image2
 	}
 
 	// If sizes are not equal then shrink
-
 	minWidth := uint(math.Min(float64(image1.Bounds().Max.X), float64(image2.Bounds().Max.X)))
 	minHeight := uint(math.Min(float64(image1.Bounds().Max.Y), float64(image2.Bounds().Max.Y)))
 
@@ -88,14 +82,11 @@ func makeImageSizesEqual(image1 image.Image, image2 image.Image) (image.Image, i
 
 func sumSquaredErrors(image1 image.Image, image2 image.Image) (float64, error) {
 	// Throw error if image sizes are not equal
-
 	if image1.Bounds().Max != image2.Bounds().Max {
 		return 0.0, errors.New("Image sizes are unequal. Cannot calculate sum of squared errors")
 	}
 
 	// Loop through pixels and calculate squared distance between RGBA values
-	// Normalize RGBA values between 0 and 1 to avoid overflow for large images
-
 	result := 0.0
 
 	for y := 0; y < image1.Bounds().Max.Y; y++ {
@@ -111,6 +102,8 @@ func sumSquaredErrors(image1 image.Image, image2 image.Image) (float64, error) {
 }
 
 func squaredDistanceNormalizeRGBA(point1 [4]uint32, point2 [4]uint32) float64 {
+	// Calculate squared Euclidean distance between RGBA points
+	// Normalize the points between 0 and 1 before calculating distance to avoid overflow
 	maxValueRGBA := 65535.0
 
 	result := 0.0

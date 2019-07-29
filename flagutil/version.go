@@ -6,7 +6,6 @@ import (
 )
 
 // Print app version + extra build information for developers
-
 func PrintVersionInfo(version, goBuildVersion, buildTime, gitHash string) {
 	fmt.Printf("Version: %s (%s %s)\n\n", version, runtime.GOOS, runtime.GOARCH)
 	fmt.Printf("For Developers Only:\n")

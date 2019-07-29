@@ -8,24 +8,20 @@ import (
 	"os"
 )
 
-// Build information from linker
-
+// Build information from build script
 var version, gitHash, buildTime, goBuildVersion string
 
-// User-specified command-line flags
-
+// Command-line flags
 var isVersionFlagPresent bool
 var inputPath, outputPath string
 
 func init() {
 	// Initialize command-line flag information
-
 	flagutil.InitFlags(&inputPath, &outputPath, &isVersionFlagPresent)
 }
 
 func main() {
 	// Run main logic
-
 	err := run()
 
 	if err != nil {
@@ -45,7 +41,6 @@ func main() {
 
 func run() error {
 	// Parse and validate command-line flags
-
 	flag.Parse()
 
 	if isVersionFlagPresent {
@@ -59,7 +54,6 @@ func run() error {
 	}
 
 	// Open input file
-
 	inputFile, err := os.Open(inputPath)
 
 	if err != nil {
@@ -69,7 +63,6 @@ func run() error {
 	defer inputFile.Close()
 
 	// Create output file
-
 	outputFile, err := os.OpenFile(outputPath, os.O_RDWR|os.O_CREATE|os.O_EXCL, 0644)
 
 	if err != nil {
@@ -79,7 +72,6 @@ func run() error {
 	defer outputFile.Close()
 
 	// Process input file
-
 	err = csvutil.Process(inputFile, outputFile)
 
 	if err != nil {
