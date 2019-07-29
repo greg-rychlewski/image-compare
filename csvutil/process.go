@@ -1,14 +1,16 @@
 package csvutil
 
 import (
+	"github.com/greg-rychlewski/image-compare/imageutil"
 	"encoding/csv"
 	"io"
 	"os"
+	"strconv"
 )
 
 // Add new columns to csv and write to output file
 
-func Process(inputFile *os.File, outputFile *os.File) {
+func Process(inputFile *os.File, outputFile *os.File) error {
         csvReader := csv.NewReader(inputFile)
         csvWriter := csv.NewWriter(outputFile)
 
@@ -22,7 +24,14 @@ func Process(inputFile *os.File, outputFile *os.File) {
                 }
 
                 if !isHeader {
-                        row = append(row, "0.1", "0.001")
+			mse, err := imageutil.MeanSquaredError(row[0], row[1])
+
+			if err != nil {
+				return err
+			}
+
+
+                        row = append(row, strconv.FormatFloat(mse, 'f', -1, 64), "0.001")
                 } else {
                         row = append(row, "similar", "elapsed")
                 }
@@ -34,4 +43,6 @@ func Process(inputFile *os.File, outputFile *os.File) {
                         isHeader = false
                 }
         }
+
+	return nil
 }

@@ -79,7 +79,11 @@ func run() error {
 
 	// Process input file
 
-	csvutil.Process(inputFile, outputFile)
+	err = csvutil.Process(inputFile, outputFile)
+
+	if err != nil {
+		return err
+	}
 
 	return nil
 }

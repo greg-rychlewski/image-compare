@@ -3,9 +3,9 @@ package imageutil
 import (
 	"github.com/nfnt/resize"
 	"errors"
-	"fmt"
 	"math"
 	"os"
+	"strings"
 	"image"
 	_ "image/gif"
 	_ "image/png"
@@ -16,7 +16,7 @@ import (
 func MeanSquaredError(imagePath1 string, imagePath2 string) (float64, error) {
 	// Open images and decode them
 
-	image1, err := os.Open(imagePath1)
+	image1, err := os.Open(strings.TrimSpace(imagePath1))
 
 	if err != nil {
 		return 0.0, err
@@ -30,7 +30,7 @@ func MeanSquaredError(imagePath1 string, imagePath2 string) (float64, error) {
 		return 0.0, err
 	}
 
-	image2, err := os.Open(imagePath2)
+	image2, err := os.Open(strings.TrimSpace(imagePath2))
 
 	if err != nil {
 		return 0.0, err

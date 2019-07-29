@@ -1,7 +1,7 @@
 image1,image2
-images/federer1.png, images/federer2.png
-images/federer1.png, images/federer1.png
-images/federer2.png, images/federer2.png
-images/white.png, images/black.png
-images/white.png, images/white.png
-images/black.png, images/black.png
+_testdata/images/federer1.png,_testdata/images/federer2.png
+_testdata/images/federer1.png,_testdata/images/federer1.png
+_testdata/images/federer2.png,_testdata/images/federer2.png
+_testdata/images/white.png,_testdata/images/black.png
+_testdata/images/white.png,_testdata/images/white.png
+_testdata/images/black.png,_testdata/images/black.png
