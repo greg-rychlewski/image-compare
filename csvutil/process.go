@@ -9,12 +9,30 @@ import (
 )
 
 // Add new columns to csv and write to output file
-func Process(inputFile *os.File, outputFile *os.File, headerIncluded bool) (int, error) {
+func Process(inputPath string, outputPath string, headerIncluded bool) (int, error) {
+	// Open input file
+        inputFile, err := os.Open(inputPath)
+
+        if err != nil {
+                return 0, err
+        }
+
+        defer inputFile.Close()
+
+        // Create output file
+        outputFile, err := os.OpenFile(outputPath, os.O_RDWR|os.O_CREATE|os.O_EXCL, 0644)
+
+        if err != nil {
+                return 0, err
+        }
+
+        defer outputFile.Close()
+
 	// Create csv reader and writer
         csvReader := csv.NewReader(inputFile)
         csvWriter := csv.NewWriter(outputFile)
 
-	// Create output csv header
+	// Writer header to output csv
 	csvWriter.Write([]string{"image1", "image2", "similarity", "elapsed(seconds)"})
 	csvWriter.Flush()
 

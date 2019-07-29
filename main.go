@@ -54,26 +54,8 @@ func run() error {
 		return err
 	}
 
-	// Open input file
-	inputFile, err := os.Open(inputPath)
-
-	if err != nil {
-		return err
-	}
-
-	defer inputFile.Close()
-
-	// Create output file
-	outputFile, err := os.OpenFile(outputPath, os.O_RDWR|os.O_CREATE|os.O_EXCL, 0644)
-
-	if err != nil {
-		return err
-	}
-
-	defer outputFile.Close()
-
 	// Process input file
-	numProcessedPairs, err := csvutil.Process(inputFile, outputFile, !isNoHeaderFlagPresent)
+	numProcessedPairs, err := csvutil.Process(inputPath, outputPath, !isNoHeaderFlagPresent)
 
 	if err != nil {
 		return err
