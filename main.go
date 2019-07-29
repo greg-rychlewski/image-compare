@@ -12,12 +12,12 @@ import (
 var version, gitHash, buildTime, goBuildVersion string
 
 // Command-line flags
-var isVersionFlagPresent bool
+var isVersionFlagPresent, isNoHeaderFlagPresent bool
 var inputPath, outputPath string
 
 func init() {
 	// Initialize command-line flag information
-	flagutil.InitFlags(&inputPath, &outputPath, &isVersionFlagPresent)
+	flagutil.InitFlags(&inputPath, &outputPath, &isVersionFlagPresent, &isNoHeaderFlagPresent)
 }
 
 func main() {
@@ -72,7 +72,7 @@ func run() error {
 	defer outputFile.Close()
 
 	// Process input file
-	err = csvutil.Process(inputFile, outputFile)
+	err = csvutil.Process(inputFile, outputFile, !isNoHeaderFlagPresent)
 
 	if err != nil {
 		return err
