@@ -1,9 +1,9 @@
 package csvutil
 
 import (
+	"encoding/csv"
 	"io"
 	"os"
-	"encoding/csv"
 )
 
 // Add new columns to csv and write to output file

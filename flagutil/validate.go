@@ -1,6 +1,7 @@
 package flagutil
 
 // Custom error type so that flag errors can cause the program to print flag defaults
+
 type FlagError struct {
 	s string
 }

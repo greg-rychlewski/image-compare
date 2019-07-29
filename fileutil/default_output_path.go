@@ -1,8 +1,8 @@
 package fileutil
 
 import (
-	"path"
 	"github.com/greg-rychlewski/image-compare/timeutil"
+	"path"
 )
 
 // Create default output path if user doesn't specify one
