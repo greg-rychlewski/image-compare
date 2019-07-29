@@ -24,16 +24,16 @@ func Process(inputFile *os.File, outputFile *os.File) error {
                 }
 
                 if !isHeader {
-			mse, err := imageutil.MeanSquaredError(row[0], row[1])
+			mse, elapsedTime, err := imageutil.MeanSquaredError(row[0], row[1])
 
 			if err != nil {
 				return err
 			}
 
 
-                        row = append(row, strconv.FormatFloat(mse, 'f', -1, 64), "0.001")
+                        row = []string{row[0], row[1], strconv.FormatFloat(mse, 'f', -1, 64), strconv.FormatFloat(elapsedTime, 'f', 4, 64)}
                 } else {
-                        row = append(row, "similar", "elapsed")
+                        row = []string{row[0], row[1], "similar", "elapsed (seconds)"}
                 }
 
                 csvWriter.Write(row)
