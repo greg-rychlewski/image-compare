@@ -93,7 +93,6 @@ func sumSquaredErrors(image1 image.Image, image2 image.Image) (float64, error) {
 
 	result := 0.0
 
-
 	for y := 0; y < image1.Bounds().Max.Y; y++ {
                  for x := 0; x < image1.Bounds().Max.X; x++ {
                         r1, g1, b1, a1 := image1.At(x, y).RGBA()
@@ -104,7 +103,6 @@ func sumSquaredErrors(image1 image.Image, image2 image.Image) (float64, error) {
         }
 
 	return result, nil
-
 }
 
 func squaredDistanceNormalizeRGBA(point1 [4]uint32, point2 [4]uint32) float64 {
@@ -121,5 +119,4 @@ func squaredDistanceNormalizeRGBA(point1 [4]uint32, point2 [4]uint32) float64 {
 	}
 
 	return result
-
 }

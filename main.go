@@ -38,6 +38,7 @@ func main() {
 			flag.PrintDefaults()
 		}
 
+		os.Remove(outputPath)
 		os.Exit(1)
 	}
 }
