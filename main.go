@@ -73,13 +73,13 @@ func run() error {
 	defer outputFile.Close()
 
 	// Process input file
-	numProcessedRows, err := csvutil.Process(inputFile, outputFile, !isNoHeaderFlagPresent)
+	numProcessedPairs, err := csvutil.Process(inputFile, outputFile, !isNoHeaderFlagPresent)
 
 	if err != nil {
 		return err
 	}
 
-	fmt.Printf("%d image pairs successfully processed\n", numProcessedRows)
+	fmt.Printf("%d image pairs successfully processed\n", numProcessedPairs)
 	fmt.Printf("Output saved to %s", outputPath)
 
 	return nil

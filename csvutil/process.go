@@ -20,7 +20,7 @@ func Process(inputFile *os.File, outputFile *os.File, headerIncluded bool) (int,
 
 	// Process input csv one line at a time
 	isFirstRow := true
-	numProcessedRows := 0
+	numProcessedPairs := 0
 
         for {
 		// Read row from csv
@@ -54,7 +54,7 @@ func Process(inputFile *os.File, outputFile *os.File, headerIncluded bool) (int,
                 csvWriter.Write(row)
                 csvWriter.Flush()
 
-		numProcessedRows++
+		numProcessedPairs++
 
 		if isFirstRow {
 			isFirstRow = false
@@ -62,5 +62,5 @@ func Process(inputFile *os.File, outputFile *os.File, headerIncluded bool) (int,
         }
 
 
-	return numProcessedRows, nil
+	return numProcessedPairs, nil
 }
