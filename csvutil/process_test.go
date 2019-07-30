@@ -3,7 +3,7 @@ package csvutil
 import (
     "os"
     "testing"
-    )
+)
 
 func TestProcess(t *testing.T) {
     realInputCSV := "../_testdata/unit_test.csv"

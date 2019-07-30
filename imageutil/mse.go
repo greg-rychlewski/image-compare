@@ -1,7 +1,7 @@
 package imageutil
 
 import (
-    "github.com/greg-rychlewski/image-compare/mathutil"
+	"github.com/greg-rychlewski/image-compare/mathutil"
 	"github.com/nfnt/resize"
 	"errors"
 	"math"

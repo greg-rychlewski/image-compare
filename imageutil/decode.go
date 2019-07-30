@@ -1,12 +1,12 @@
 package imageutil
 
 import (
-	_ "image/png"
-	_ "image/gif"
-	_ "image/jpeg"
-	"image"
-	"os"
-	"strings"
+    _ "image/png"
+    _ "image/gif"
+    _ "image/jpeg"
+    "image"
+    "os"
+    "strings"
 )
 
 // Return decoded image data from file path

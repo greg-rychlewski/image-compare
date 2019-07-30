@@ -1,17 +1,17 @@
 package csvutil
 
 import (
-	"github.com/greg-rychlewski/image-compare/imageutil"
-	"encoding/csv"
-	"io"
-	"os"
-	"strconv"
+    "github.com/greg-rychlewski/image-compare/imageutil"
+    "encoding/csv"
+    "io"
+    "os"
+    "strconv"
 )
 
 // Custom error type so that captures the csv row number 
 type CsvError struct {
-	Row int
-	Message string
+    Row int
+    Message string
 }
 
 func (e *CsvError) Error() string {
