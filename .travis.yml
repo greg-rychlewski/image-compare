@@ -16,5 +16,4 @@ deploy:
     - bin/image_compare-windows-386.exe
     - bin/image_compare-windows-amd64.exe
   on:
-    repo: greg-rychlewski/image-compare
     tags: true
