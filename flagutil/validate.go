@@ -1,18 +1,11 @@
 package flagutil
 
-// Custom error type so that flag errors can cause the program to print default flag values
-type FlagError struct {
-	s string
-}
-
-func (e *FlagError) Error() string {
-	return e.s
-}
+import "errors"
 
 // Validate user input to command-line flags
 func ValidateInputPath(inputPath string) error {
 	if inputPath == "" {
-		return &FlagError{"Input path is missing"}
+		return errors.New("location of input csv file is missing. please specify using the -in flag")
 	}
 
 	return nil

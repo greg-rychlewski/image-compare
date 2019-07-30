@@ -21,48 +21,35 @@ func init() {
 }
 
 func main() {
-	// Run main logic
-	err := run()
-
-	if err != nil {
-		fmt.Fprintln(os.Stderr, "(ERROR)", err)
-
-		_, ok := err.(*flagutil.FlagError)
-
-		if ok {
-			fmt.Printf("Usage of %s \n", os.Args[0])
-			flag.PrintDefaults()
-		}
-
-		os.Remove(outputPath)
-		os.Exit(1)
-	}
-
-}
-
-func run() error {
 	// Parse and validate command-line flags
-	flag.Parse()
+        flag.Parse()
 
-	if isVersionFlagPresent {
-		flagutil.PrintVersionInfo(version, goBuildVersion, buildTime, gitHash)
+        if isVersionFlagPresent {
+                flagutil.PrintVersionInfo(version, goBuildVersion, buildTime, gitHash)
 
-		return nil
-	}
+                return
+        }
 
-	if err := flagutil.ValidateInputPath(inputPath); err != nil {
-		return err
-	}
+        if err := flagutil.ValidateInputPath(inputPath); err != nil {
+		fmt.Fprintln(os.Stderr, err)
+		fmt.Fprintf(os.Stderr, "Usage of %s:\n", os.Args[0])
+		flag.PrintDefaults()
 
-	// Process input file
-	numProcessedPairs, err := csvutil.Process(inputPath, outputPath, !isNoHeaderFlagPresent)
+		os.Exit(1)
+        }
 
-	if err != nil {
-		return err
-	}
+        // Process input file
+	fmt.Println("processing csv file...")
 
-	fmt.Printf("%d image pairs successfully processed\n", numProcessedPairs)
-	fmt.Printf("Output saved to %s", outputPath)
+        numProcessedPairs, err := csvutil.Process(inputPath, outputPath, !isNoHeaderFlagPresent)
 
-	return nil
+        if err != nil {
+		fmt.Fprintln(os.Stderr, "error: ", err)
+		os.Remove(outputPath)
+
+		os.Exit(1)
+        }
+
+        fmt.Printf("%d image pairs successfully processed\n", numProcessedPairs)
+        fmt.Printf("output saved to %s", outputPath)
 }
