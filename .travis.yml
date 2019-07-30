@@ -1,3 +1,6 @@
 language: go
 go:
   - 1.x
+
+script:
+  - "./build.sh"
