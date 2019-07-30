@@ -12,6 +12,15 @@ GO_VERSION=`go version`
 TARGET_OS='windows darwin'
 TARGET_ARCH='386 amd64'
 
+# Run unit tests before building
+go test -v ./...
+
+rc=$?
+
+if [ $rc != 0 ]; then
+  exit $rc
+fi
+
 # Build app for each operating system/architecture combination
 for OS in ${TARGET_OS}; do
   for ARCH in ${TARGET_ARCH}; do
@@ -27,5 +36,11 @@ for OS in ${TARGET_OS}; do
     go build \
       -o bin/${BINARY_FILE}\
       -ldflags "-X 'main.goBuildVersion=${GO_VERSION}' -X main.buildTime=${BUILD_TIME_UTC} -X main.gitHash=${GIT_HASH} -X main.version=${APP_VERSION}"
+
+    rc=$?
+
+    if [ $rc != 0 ]; then
+      exit $rc
+    fi
   done
 done

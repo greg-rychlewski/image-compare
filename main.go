@@ -1,11 +1,11 @@
 package main
 
 import (
-	"github.com/greg-rychlewski/image-compare/csvutil"
-	"github.com/greg-rychlewski/image-compare/flagutil"
-	"flag"
-	"fmt"
-	"os"
+    "github.com/greg-rychlewski/image-compare/csvutil"
+    "github.com/greg-rychlewski/image-compare/flagutil"
+    "flag"
+    "fmt"
+    "os"
 )
 
 // Build variables imported from ldflags
