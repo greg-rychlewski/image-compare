@@ -1,4 +1,6 @@
-# Remember to update this variable when publishing a new version
+#!/bin/bash
+
+# Update this variable when publishing a new version
 APP_VERSION=1.0.0
 
 # This will embed develpment information into our app
@@ -23,7 +25,7 @@ for OS in ${TARGET_OS}; do
 
     GOOS=${OS} GOARCH=${ARCH} \
     go build \
-      -o build/${BINARY_FILE}\
+      -o bin/${BINARY_FILE}\
       -ldflags "-X 'main.goBuildVersion=${GO_VERSION}' -X main.buildTime=${BUILD_TIME_UTC} -X main.gitHash=${GIT_HASH} -X main.version=${APP_VERSION}"
   done
 done
