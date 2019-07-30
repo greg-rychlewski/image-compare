@@ -39,7 +39,7 @@ func main() {
         }
 
         // Process input file
-	fmt.Println("processing csv file...")
+	fmt.Printf("processing %s...\n", inputPath)
 
         numProcessedPairs, err := csvutil.Process(inputPath, outputPath, !isNoHeaderFlagPresent)
 

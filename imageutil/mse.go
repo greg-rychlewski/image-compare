@@ -8,7 +8,6 @@ import (
 	"image"
 )
 
-
 func MeanSquaredError(image1 image.Image, image2 image.Image) (float64, float64, error) {
 	// Get start time so that the elapsed time for the function run can be returned
 	start := time.Now()
@@ -48,7 +47,7 @@ func makeImageSizesEqual(image1 image.Image, image2 image.Image) (image.Image, i
 func sumSquaredErrors(image1 image.Image, image2 image.Image) (float64, error) {
 	// Throw error if image sizes are not equal
 	if image1.Bounds().Max != image2.Bounds().Max {
-		return 0.0, errors.New("Image sizes are unequal. Cannot calculate sum of squared errors")
+		return 0.0, errors.New("image sizes are unequal. cannot calculate sum of squared errors.")
 	}
 
 	// Loop through pixels and calculate squared distance between RGBA values
