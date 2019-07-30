@@ -11,8 +11,8 @@ deploy:
   api_key:
     secure: A9GoQOedXyizJdZ41l2E5fQ9PHezsIjw+1Z9tn+pn0/hKFX+eYrEANqIuhDCOcNhzOSPBBe9i7HtCuyoGGzjRp/LMPQONjkfouubbuSp98+ZpryaSjoe+bGBqwsjJjDGR8o/DDgGq40gE7kcPkLN8SFen43GU+VBp9jQQK1AjU/zNUm1RM0t7mgCohx6T0wQs6R0XBBR5Y3YRyk2xACKfisCfvmCTXNiWxz2ahdEzOUXQK1LlTHVQpxyO47p4aO0xvWKc0OQWMkhxZEvnowmETEqjTutZr+oNit1sIZ4mRhikdb2zUilfMeDGUq5V3yjUkBdtzVfQEa5fqZapD3A7vkjEBOsh7nz08UbMltvCKHhAYrhClI1anMUqZeHKDqb+zb3T170LG1ALtvXvGBykyiQO8eoqgHeXz1pguEZGwiVS32oD/BahoVR5nnb291lgQuBVERiaGfc0CBTr4ROZCoFE8IMQIPS0VIpH6TTYa+GJxsi4YL1e3qvzDHHtkv6kWnygF21y8epg2Y1JDduRHay4cLceH6I5FlrFEt5Nv7Gkw5RsnWobKw8CU9t8R5E9mFMamigv0kSOssLjL4KBYaSuqfkssm1RyHlZcSskyb+VAt4F78CvzGCcnPWlRgG1rS3DT++EbT9e+0lhyWq68MHz6HwH7aUl3L77w2aBZ0=
   file:
-    - bin/image_compare-darwin-386.app
-    - bin/image_compare-darwin-amd64.app
+    - bin/image_compare-darwin-386
+    - bin/image_compare-darwin-amd64
     - bin/image_compare-windows-386.exe
     - bin/image_compare-windows-amd64.exe
   on:

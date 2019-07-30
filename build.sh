@@ -28,8 +28,6 @@ for OS in ${TARGET_OS}; do
 
     if [[ ${OS} == 'windows' ]]; then
       BINARY_FILE=${BINARY_FILE}.exe
-    elif [[ ${OS} == 'darwin' ]]; then
-      BINARY_FILE=${BINARY_FILE}.app
     fi;
 
     echo Building ${BINARY_FILE}
