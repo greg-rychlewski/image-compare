@@ -7,7 +7,7 @@ func TestMSE(t *testing.T) {
 	blackOpaque, _ := DecodeImage("../_testdata/images/black.png")
 	whiteOpaque, _ := DecodeImage("../_testdata/images/white.png")
 
-	// Test #1: MSE between image with all (0,0,0,0) rgba and image with all (255,255,255,255) rgba should be 1
+	// Test #1: MSE between an image with all (0,0,0,0) rgba and an image with all (255,255,255,255) rgba should be 1
 	if mse, _, _ := MeanSquaredError(blackTransparent, whiteOpaque); mse != 1.0 {
 		t.Error("MSE between image with all (0,0,0,0) rgba and image with all (255,255,255,255) rgba is not 1")
 	}
