@@ -1,21 +1,3 @@
 language: go
 go:
   - 1.x
-
-script:
-  - go test -v ./...
-  - "./build.sh"
-
-deploy:
-  provider: releases
-  skip_cleanup: true
-   api_key:
-    secure: F/jApsMDtYoPpxj83dcqpFLycQXpNnEOZGmamFStCJTHqK5mlW1d+lFtp62ZEEbNt8qqhe4K8zSIM++/yRtY+Bty09bG384sTC9f+zwgmC9VRTb1Dv9vDGdHm100bMgusm4Ytd+n+J2JyWCbg/+tU7yEb7/Ws4OSzQ83YRHxeFTcFcv++75D1dIKp2devwFzAWTds7VxOzjW7WJHUwimBNjg7Rl60m/ahI46LktyWUYX1caTWM2/25x9jL7dbRnbNuewa/SBHFNBm7bdIGDodt3UCcDoXfCn5+3ujzdzOdB61k5dZ7Z3G789nc+kMVfkAAbiRX//odaE4uJLjdxmj+KHSj6yxo/4wOXUOLqlrjOcpmVLzQuMSc2rDQGxcHzNm2RJHwi6ktK2DZGcmwt9AZOk6iS4V2WRbjTzmZGVEXEYc2mp25rB2S9hZu9Nx/EMq90foD6+62RNR/OyQ2R54bPcL7IC96uwvIOOgxw6GPhczfPQ+y4Q1ZH1SQlgddBea/3E/IwPU9rRq3zkz5kJXiL9iT9ykjLYUySXmPDhGeafjlFMCKPvDR47/qL+/i5BrFSibf8uZXQ77yWOYMXBQKLislJgSGzYplw43FIieyeQVJoHczJahjoYdA/5bL+m9oKm/mkD7cOm01yLfG1zOTWsaLdIp5QiX2tydyAWJhg=
-  file:
-    - bin/image_compare-darwin-386
-    - bin/image_compare-darwin-amd64
-    - bin/image_compare-windows-386.exe
-    - bin/image_compare-windows-amd64.exe
-  on:
-    repo: greg-rychlewski/image-compare
-    tags: true
