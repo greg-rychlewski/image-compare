@@ -30,8 +30,6 @@ for OS in ${TARGET_OS}; do
       BINARY_FILE=${BINARY_FILE}.exe
     fi;
 
-    echo Building ${BINARY_FILE}
-
     GOOS=${OS} GOARCH=${ARCH} \
     go build \
       -o bin/${BINARY_FILE}\
@@ -42,5 +40,18 @@ for OS in ${TARGET_OS}; do
     if [ $rc != 0 ]; then
       exit $rc
     fi
+
+    # Rename file to something more user-friendly and tar it so user can preserve permissions when extracting
+    FRIENDLY_NAME=image_compare
+
+    if [[ ${OS} == 'windows' ]]; then
+      FRIENDLY_NAME=${FRIENDLY_NAME}.exe
+    fi
+
+    mv bin/${BINARY_FILE} bin/${FRIENDLY_NAME}
+    
+    chmod +x bin/${FRIENDLY_NAME}
+
+    tar cf bin/image_compare-${OS}-${ARCH}.tar -C bin ${FRIENDLY_NAME} --remove-files
   done
 done
