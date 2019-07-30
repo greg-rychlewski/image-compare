@@ -45,7 +45,7 @@ func main() {
 
     if err != nil {
         if csvErr, ok := err.(*csvutil.CsvError); ok {
-            fmt.Fprintf(os.Stderr, "\n%s line %d. %s\n", inputPath, csvErr.Row, csvErr.Message)
+            fmt.Fprintf(os.Stderr, "%s line %d. %s\n", inputPath, csvErr.Row, csvErr.Message)
         } else {
             fmt.Fprintln(os.Stderr, err)
         }
