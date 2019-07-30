@@ -1,6 +1,7 @@
 package imageutil
 
 import (
+    "github.com/greg-rychlewski/image-compare/mathutil"
 	"github.com/nfnt/resize"
 	"errors"
 	"math"
@@ -15,7 +16,7 @@ func MeanSquaredError(image1 image.Image, image2 image.Image) (float64, float64,
 	// Resize images so that they are equal
 	image1, image2 = makeImageSizesEqual(image1, image2)
 
-        // Calculate sum of squared errors
+    // Calculate sum of squared errors
 	sse, err := sumSquaredErrors(image1, image2)
 
 	if err != nil {
@@ -23,7 +24,6 @@ func MeanSquaredError(image1 image.Image, image2 image.Image) (float64, float64,
 	}
 
 	mse := sse / (4.0 * float64(image1.Bounds().Max.X * image2.Bounds().Max.Y))
-
 
 	return mse, time.Since(start).Seconds(), nil
 }
@@ -47,38 +47,31 @@ func makeImageSizesEqual(image1 image.Image, image2 image.Image) (image.Image, i
 func sumSquaredErrors(image1 image.Image, image2 image.Image) (float64, error) {
 	// Throw error if image sizes are not equal
 	if image1.Bounds().Max != image2.Bounds().Max {
-		return 0.0, errors.New("image sizes are unequal. cannot calculate sum of squared errors.")
+	   return 0.0, errors.New("image sizes are unequal. cannot calculate sum of squared errors.")
 	}
 
 	// Loop through pixels and calculate squared distance between RGBA values
 	result := 0.0
 
 	for y := 0; y < image1.Bounds().Max.Y; y++ {
-                 for x := 0; x < image1.Bounds().Max.X; x++ {
-                        r1, g1, b1, a1 := image1.At(x, y).RGBA()
+        for x := 0; x < image1.Bounds().Max.X; x++ {
+            r1, g1, b1, a1 := image1.At(x, y).RGBA()
 			r2, g2, b2, a2 := image2.At(x, y).RGBA()
 
-			result += squaredDistanceNormalizeRGBA([4]uint32{r1, g1, b1, a1}, [4]uint32{r2, g2, b2, a2})
-                 }
+			pixel1 := []float64{normalizeRGBA(r1), normalizeRGBA(g1), normalizeRGBA(b1), normalizeRGBA(a1)}
+			pixel2 := []float64{normalizeRGBA(r2), normalizeRGBA(g2), normalizeRGBA(b2), normalizeRGBA(a2)}
+
+			distance, _ := mathutil.SquaredDistance(pixel1, pixel2)
+
+            result += distance
         }
+    }
 
 	return result, nil
 }
 
-func squaredDistanceNormalizeRGBA(point1 [4]uint32, point2 [4]uint32) float64 {
-	// Calculate squared Euclidean distance between RGBA points
-	// Normalize the points between 0 and 1 before calculating distance to avoid overflow
-	maxValueRGBA := 65535.0
+func normalizeRGBA(value uint32) float64 {
+	maxValue := 65535.0
 
-	result := 0.0
-
-	for i := 0; i < 4; i++ {
-		if point1[i] < point2[i] {
-			result += math.Pow(float64(point2[i] - point1[i]) / maxValueRGBA, 2)
-		} else {
-			result += math.Pow(float64(point1[i] - point2[i]) / maxValueRGBA, 2)
-		}
-	}
-
-	return result
+	return float64(value) / maxValue
 }

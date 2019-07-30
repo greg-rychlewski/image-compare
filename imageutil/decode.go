@@ -11,19 +11,19 @@ import (
 
 // Return decoded image data from file path
 func DecodeImage(imagePath string) (image.Image, error) {
-        imageFile, err := os.Open(strings.TrimSpace(imagePath))
+    imageFile, err := os.Open(strings.TrimSpace(imagePath))
 
-        if err != nil {
-                return nil, err
-        }
+    if err != nil {
+        return nil, err
+    }
 
-        defer imageFile.Close()
+    defer imageFile.Close()
 
-        image, _, err := image.Decode(imageFile)
+    image, _, err := image.Decode(imageFile)
 
-        if err != nil {
-                return nil, err
-        }
+    if err != nil {
+        return nil, err
+    }
 
-        return image, nil
+    return image, nil
 }
