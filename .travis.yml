@@ -3,4 +3,4 @@ go:
   - 1.x
 
 script:
-  - "./build.sh"
+  - ./build.sh

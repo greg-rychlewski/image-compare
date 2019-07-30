@@ -13,7 +13,7 @@ TARGET_OS='windows darwin'
 TARGET_ARCH='386 amd64'
 
 # Run unit tests before building
-go testfe -v ./...
+go test -v ./...
 
 rc=$?
 
