@@ -8,7 +8,7 @@ import (
 	"os"
 )
 
-// Build information from build script
+// Build variables imported from ldflags
 var version, gitHash, buildTime, goBuildVersion string
 
 // Command-line flags
@@ -35,21 +35,26 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Usage of %s:\n", os.Args[0])
 		flag.PrintDefaults()
 
-		os.Exit(1)
+		return
         }
 
         // Process input file
-	fmt.Printf("processing %s...\n", inputPath)
+	fmt.Printf("Processing %s...\n", inputPath)
 
         numProcessedPairs, err := csvutil.Process(inputPath, outputPath, !isNoHeaderFlagPresent)
 
         if err != nil {
-		fmt.Fprintln(os.Stderr, "error", err)
-		os.Remove(outputPath)
+		if csvErr, ok := err.(*csvutil.CsvError); ok {
+			fmt.Fprintf(os.Stderr, "%s line %d). %s\n", inputPath, csvErr.Row, csvErr.Message)
+		} else {
+			fmt.Fprintln(os.Stderr, err)
+		}
 
+		fmt.Fprintln(os.Stderr, "Fatal error. Program exiting unsuccessfully.")
+		os.Remove(outputPath)
 		os.Exit(1)
         }
 
         fmt.Printf("%d image pairs successfully processed\n", numProcessedPairs)
-        fmt.Printf("output saved to %s", outputPath)
+        fmt.Printf("Output saved to %s", outputPath)
 }

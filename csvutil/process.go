@@ -8,6 +8,16 @@ import (
 	"strconv"
 )
 
+// Custom error type so that captures the csv row number 
+type CsvError struct {
+	Row int
+	Message string
+}
+
+func (e *CsvError) Error() string {
+    return e.Message
+}
+
 // Add new columns to csv and write to output file
 func Process(inputPath string, outputPath string, headerIncluded bool) (int, error) {
 	// Open input file
@@ -62,20 +72,20 @@ func Process(inputPath string, outputPath string, headerIncluded bool) (int, err
 		image1, err := imageutil.DecodeImage(row[0])
 
 		if err != nil {
-			return 0, err
+			return 0, &CsvError{numProcessedPairs + 1, err.Error()}
 		}
 
 		image2, err := imageutil.DecodeImage(row[1])
 
 		if err != nil {
-			return 0, err
+			return 0, &CsvError{numProcessedPairs + 1, err.Error()}
 		}
 
 		// Calculate mse along with the time the computation took
 		mse, elapsedTime, err := imageutil.MeanSquaredError(image1, image2)
 
 		if err != nil {
-			return 0, err
+			return 0, &CsvError{numProcessedPairs + 1, err.Error()}
 		}
 
                 row = []string{row[0], row[1], strconv.FormatFloat(mse, 'f', -1, 64), strconv.FormatFloat(elapsedTime, 'f', 4, 64)}
