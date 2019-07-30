@@ -42,5 +42,8 @@ for OS in ${TARGET_OS}; do
     if [ $rc != 0 ]; then
       exit $rc
     fi
+
+    # Make sure output file is executable
+    chmod +x bin/${BINARY_FILE}
   done
 done
