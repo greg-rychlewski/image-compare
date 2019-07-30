@@ -44,7 +44,7 @@ func main() {
         numProcessedPairs, err := csvutil.Process(inputPath, outputPath, !isNoHeaderFlagPresent)
 
         if err != nil {
-		fmt.Fprintln(os.Stderr, "error: ", err)
+		fmt.Fprintln(os.Stderr, "error", err)
 		os.Remove(outputPath)
 
 		os.Exit(1)

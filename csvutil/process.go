@@ -33,7 +33,7 @@ func Process(inputPath string, outputPath string, headerIncluded bool) (int, err
         csvWriter := csv.NewWriter(outputFile)
 
 	// Writer header to output csv
-	csvWriter.Write([]string{"image1", "image2", "similarity", "elapsed(seconds)"})
+	csvWriter.Write([]string{"image1", "image2", "similarity", "elapsed"})
 	csvWriter.Flush()
 
 	// Process input csv one line at a time
@@ -58,8 +58,21 @@ func Process(inputPath string, outputPath string, headerIncluded bool) (int, err
 			continue
 		}
 
+		// Decode images
+		image1, err := imageutil.DecodeImage(row[0])
+
+		if err != nil {
+			return 0, err
+		}
+
+		image2, err := imageutil.DecodeImage(row[1])
+
+		if err != nil {
+			return 0, err
+		}
+
 		// Calculate mse along with the time the computation took
-		mse, elapsedTime, err := imageutil.MeanSquaredError(row[0], row[1])
+		mse, elapsedTime, err := imageutil.MeanSquaredError(image1, image2)
 
 		if err != nil {
 			return 0, err
@@ -78,7 +91,6 @@ func Process(inputPath string, outputPath string, headerIncluded bool) (int, err
 			isFirstRow = false
 		}
         }
-
 
 	return numProcessedPairs, nil
 }

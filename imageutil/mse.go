@@ -4,61 +4,26 @@ import (
 	"github.com/nfnt/resize"
 	"errors"
 	"math"
-	"os"
-	"strings"
 	"time"
 	"image"
-	_ "image/gif"
-	_ "image/png"
-	_ "image/jpeg"
 )
 
 
-func MeanSquaredError(imagePath1 string, imagePath2 string) (float64, float64, error) {
+func MeanSquaredError(image1 image.Image, image2 image.Image) (float64, float64, error) {
 	// Get start time so that the elapsed time for the function run can be returned
 	start := time.Now()
 
-	// Open images and decode them
-	image1, err := os.Open(strings.TrimSpace(imagePath1))
-
-	if err != nil {
-		return 0.0, 0.0, err
-	}
-
-	defer image1.Close()
-
-	imageData1, _, err := image.Decode(image1)
-
-	if err != nil {
-		return 0.0, 0.0, err
-	}
-
-	image2, err := os.Open(strings.TrimSpace(imagePath2))
-
-	if err != nil {
-		return 0.0, 0.0, err
-	}
-
-	defer image2.Close()
-
-	imageData2, _, err := image.Decode(image2)
-
-	if err != nil {
-		return 0.0, 0.0, err
-	}
-
-
 	// Resize images so that they are equal
-	imageData1, imageData2 = makeImageSizesEqual(imageData1, imageData2)
+	image1, image2 = makeImageSizesEqual(image1, image2)
 
         // Calculate sum of squared errors
-	sse, err := sumSquaredErrors(imageData1, imageData2)
+	sse, err := sumSquaredErrors(image1, image2)
 
 	if err != nil {
 		return 0.0, 0.0, err
 	}
 
-	mse := sse / (4.0 * float64(imageData1.Bounds().Max.X * imageData2.Bounds().Max.Y))
+	mse := sse / (4.0 * float64(image1.Bounds().Max.X * image2.Bounds().Max.Y))
 
 
 	return mse, time.Since(start).Seconds(), nil
