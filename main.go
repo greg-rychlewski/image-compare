@@ -31,7 +31,7 @@ func main() {
     }
 
     if err := flagutil.ValidateInputPath(inputPath); err != nil {
-        fmt.Fprintf(os.Stderr, "\n%s \n\n", err.Error())
+        fmt.Fprintf(os.Stderr, "\n%s\n\n", err.Error())
         fmt.Fprintf(os.Stderr, "Usage of %s:\n", os.Args[0])
         flag.PrintDefaults()
 
@@ -56,5 +56,5 @@ func main() {
     }
 
     fmt.Printf("%d image pairs processed\n", numProcessedPairs)
-    fmt.Printf("Output saved to %s", outputPath)
+    fmt.Printf("Output saved to %s\n", outputPath)
 }
