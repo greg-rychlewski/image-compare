@@ -45,7 +45,7 @@ func main() {
 
         if err != nil {
 		if csvErr, ok := err.(*csvutil.CsvError); ok {
-			fmt.Fprintf(os.Stderr, "%s line %d). %s\n", inputPath, csvErr.Row, csvErr.Message)
+			fmt.Fprintf(os.Stderr, "%s line %d. %s\n", inputPath, csvErr.Row, csvErr.Message)
 		} else {
 			fmt.Fprintln(os.Stderr, err)
 		}
@@ -55,6 +55,6 @@ func main() {
 		os.Exit(1)
         }
 
-        fmt.Printf("%d image pairs successfully processed\n", numProcessedPairs)
+        fmt.Printf("%d image pairs processed\n", numProcessedPairs)
         fmt.Printf("Output saved to %s", outputPath)
 }

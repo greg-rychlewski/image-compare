@@ -1,0 +1,7 @@
+image1,image2,similarity,elapsed
+_testdata/images/federer1.png,_testdata/images/federer2.png,0.058359158191851696,0.1017
+_testdata/images/federer1.png,_testdata/images/federer1.png,0,0.1037
+_testdata/images/federer2.png,_testdata/images/federer2.png,0,0.0499
+_testdata/images/black.png,_testdata/images/white.png,0.75,0.0957
+_testdata/images/black.png,_testdata/images/black.png,0,0.1117
+_testdata/images/white.png,_testdata/images/white.png,0,0.1147
