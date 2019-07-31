@@ -56,11 +56,11 @@ Run `image_compare -h` to see a list of other options you can specify.
 <img src="https://github.com/greg-rychlewski/image-compare/blob/master/_testdata/images/flowchart.png">
 </p>
 
-1. Validate user input
-2. Read line from csv file
-3. Validate image paths
-4. Calculate mean squared error for the 2 images
-5. Write results to output csv
+1. Validate user input. The user can specify input/output csv locations.
+2. Read line from csv file. This will contain 2 image paths.
+3. Validate image paths.
+4. Calculate mean squared error for the 2 images.
+5. Write results to output csv. This will include the original image paths as well as the mse and the elapsed time for the calculation.
 6. Repeat 2-5 until you get to the end of the input csv
 
 Note: Program exits early if there are any errors that would prohibit the calculation of a pair of images.
