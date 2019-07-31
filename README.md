@@ -6,7 +6,7 @@ Calculates the mean squared error for pairs of images.
 
 You can download the latest release from GitHub
 
-    (https://github.com/greg-rychlewski/image-compare/releases/latest) 
+https://github.com/greg-rychlewski/image-compare/releases/latest
 
 To be notified of new releases, log into your GitHub account and click the `watch` button at the top of this page.
 
