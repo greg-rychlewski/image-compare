@@ -73,9 +73,18 @@ I allow the user to specify the following flags:
 - Input csv
   - Required because the program can't do anything without it.
 - Output csv
-  - Optional for user convenience. Default output is timestamped down to the second to ensure uniqueness 
+  - Optional for user convenience. Default output is timestamped down to the second to ensure uniqueness.
 - No header in csv file
   - Included for user convenience. Their csv file might be missing a header sometimes.
 - Version information
   - Included so user can see if they have the latest release. Added other information for developers (git hash, go version, build time) in case they are asked to help the user when something is wrong.
 
+#### CSV Processing
+
+- I chose to read the csv file one line at a time instead of reading all of it into memory at once. This avoids issues when the file is larger than the amount of available RAM.
+- When creating an output row, I don't append the results to the entire input row. It's possible the input csv could have data in columns 3+ even though they're supposed to be empty. 
+- I exit the entire program if a single line has an unrecoverable error. I could have skipped over problematic lines and continued to process the good ones. I chose this way because the requirements state that the output should be in the same order as the input. This means the user is going to have to rerun the entire file again and there's no point in continuing.
+
+#### Image Processing
+
+- I chose mean squared error for the similarity calculation. My reasons for choosing it are because it's quick, simple and guaranteed to give 0 when 2 images are equal.
