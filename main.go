@@ -51,7 +51,6 @@ func main() {
         }
 
         fmt.Fprintln(os.Stderr, "Fatal error. Program exiting unsuccessfully.")
-        os.Remove(outputPath)
         os.Exit(1)
     }
 
