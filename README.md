@@ -101,7 +101,7 @@ I allow the user to specify the following flags:
 #### Dependencies
 
 - I took care to use as little dependencies outside of the Go standard libary as possible. In general, it's harder to make sure those kinds of libraries will be updated and remain compatible as Go evolves. I only used one external library for image resizing.
-- I use Go modules to make sure the information for the one external libary I used is available to other developers.
+- I use Go modules to make sure external library information is available to other developers.
 
 #### Continuous Integration
 
