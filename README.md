@@ -22,7 +22,7 @@ Extract the contents of the file as follows
 
 The program will be extracted as `image_compare`.
 
-Developers wishing to build from source must install Go on their computer and use the _go_ _get_ command
+Developers wishing to build from source must install Go on their computer and use the `go get` command
   
     go get github.com/greg-rychlewski/image-compare
   
