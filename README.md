@@ -84,7 +84,7 @@ I allow the user to specify the following flags:
 - I chose to read the csv file one line at a time instead of reading all of it into memory at once. This avoids issues when the file is larger than the amount of available RAM.
 - I created a custom error type for csv-related errors. This is so I can add the csv line number to the error message. It makes it easier for the user to investigate issues.
 - When creating an output row, I don't append the results to the entire input row. It's possible the input csv could have data in columns 3+ even though they're supposed to be empty. I take only the first 2 columns and append the results to those.
-- I exit the entire program if a single line has an unrecoverable error. I could have skipped over problematic lines and continued to process the good ones. I chose this way because the requirements state that the output should be in the same order as the input. This means the user is going to have to rerun the entire file again and there's no point in continuing.
+- I exit the entire program if a single line has an unrecoverable error. I could have skipped over problematic lines and continued to process the good ones. I chose this way because the requirements are for the output to have the same number of lines as the input. This means the user is going to have to rerun the entire file again and there's no point in continuing.
 
 #### Image Processing
 
@@ -118,3 +118,5 @@ I allow the user to specify the following flags:
   - One worker reading the csv lines and putting them into a buffer
   - Several workers reading from that buffer, processing the images and putting the output into another buffer
   - One worker reading from the output buffer and writing the results to the output csv
+- Right now I exit the program if there is an issue processing any of the csv rows. I did this because the requirements are for the output to have the same number of rows as the input. From experience, I know requirements change all the time. The user may end up wanting the option of processing only the good rows and discarding or dealing with the problematic rows later. It would be really simple to add a command-line flag called `-skip-bad` to handle this. I would probably add an additional column called `original_row_number` to make it easy for the user to cross-reference the original csv.
+- The app is only capable of processing comma delimited files. In the future there may be a need to extend it to other delimiters. There may also be a need to accept Excel files since it's a really popular way for offices to share data.
