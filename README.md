@@ -77,14 +77,20 @@ I allow the user to specify the following flags:
 - No header in csv file
   - Included for user convenience. Their csv file might be missing a header sometimes.
 - Version information
-  - Included so user can see if they have the latest release. Added other information for developers (git hash, go version, build time) in case they are asked to help the user when something is wrong.
+  - Included so user can see if they have the latest release. Added other information for developers (git hash, go version, build time) in case they are asked to help the user when something goes wrong.
 
 #### CSV Processing
 
 - I chose to read the csv file one line at a time instead of reading all of it into memory at once. This avoids issues when the file is larger than the amount of available RAM.
-- When creating an output row, I don't append the results to the entire input row. It's possible the input csv could have data in columns 3+ even though they're supposed to be empty. 
+- I created a custom error type for csv-related errors. This is so I can add the csv line number to the error message. It makes it easier for the user to investigate issues.
+- When creating an output row, I don't append the results to the entire input row. It's possible the input csv could have data in columns 3+ even though they're supposed to be empty. I take only the first 2 columns and append the results to those.
 - I exit the entire program if a single line has an unrecoverable error. I could have skipped over problematic lines and continued to process the good ones. I chose this way because the requirements state that the output should be in the same order as the input. This means the user is going to have to rerun the entire file again and there's no point in continuing.
 
 #### Image Processing
 
-- I chose mean squared error for the similarity calculation. My reasons for choosing it are because it's quick, simple and guaranteed to give 0 when 2 images are equal.
+- I chose mean squared error for the similarity calculation. My reasons for choosing it are because it's quick, simple and guaranteed to give 0 when the images are equal. From the requirements, it sounds like we are more concerned with getting decent scores quickly than taking a long time to get perfect scores.
+- If the images have different sizes then I shrink the bigger one so that it is equal to the smaller one. I do this because mse is undefined when one of the images is missing a pixel. I chose to scale rather than crop so that we are not ignoring large sections of an image. I chose to scale down rather than up so that we are looping over less pixels when calculating mse. 
+- When calculating mse, I normalize all the rgba values between 0 and 1 to avoid potential overflow. RGBA values in Go are between 0 and 65535 instead of 0 and 255.
+
+### Build Script
+
