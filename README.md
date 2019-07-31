@@ -114,4 +114,7 @@ I allow the user to specify the following flags:
 #### Opportunities for Improvement
 
 - MSE is calculated by looping through the pixels one at a time. I would like to see if Go has a way to vectorize these operations, like Python's numpy. I've read about the gonum package and would be interested in seeing if it can be used with image data.
-- 
+- This might be overkill, but if the number of images being processed gets really big it might be fun to see if multi-threading speeds things up. If I was going to try this, I would set it up in the following way:
+  - One worker reading the csv lines and putting them into a buffer
+  - Several workers reading from that buffer, processing the images and putting the output into another buffer
+  - One worker reading from the output buffer and writing the results to the output csv
