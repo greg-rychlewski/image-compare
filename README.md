@@ -100,7 +100,7 @@ I allow the user to specify the following flags:
 
 #### Dependencies
 
-- I took care to use as little dependencies outside of the Go standard libary as possible. In general, it's harder to make sure those kinds of libraries will be updated and remain compatible as Go evolves. I only used one external library for image resizing.
+- I took care to use as little dependencies outside of the Go standard libary as possible. In general, it's harder to make sure those libraries will be updated and remain compatible with future versions of Go. I only used one external library for image resizing.
 - I use Go modules to make sure external library information is available to other developers.
 
 #### Continuous Integration
@@ -109,7 +109,7 @@ I allow the user to specify the following flags:
 
 #### Code Structure
 
-- My philosophy for the code structure was to be as modular as possible and have the main function use those modules. This makes the code more organized and less coupled. This is a pretty small project, but I feel like it's a good idea to start this way from the beginning to avoid a lot of refactoring when the project gets bigger.
+- My philosophy for the code structure was to be as modular as possible and have the main function call other packages to do its work. This makes the code more organized and less coupled. This is a pretty small project, but I feel like it's a good idea to start this way from the beginning to avoid a lot of refactoring when the project gets bigger.
 
 #### Opportunities for Improvement
 
