@@ -73,9 +73,9 @@ I allow the user to specify the following flags:
 - Input csv
   - Required because the program can't do anything without it.
 - Output csv
-  - I made this optional for the user's convenience. If this isn't specified then a time-stamped file is created in the current directory. The file is timestamped down to the second to ensure uniqueness. 
+  - Optional for user convenience. Default output is timestamped down to the second to ensure uniqueness 
 - No header in csv file
-  - If this user's csv file is ever missing a header they can just specify this option instead of creating the header themselves. It might not be much of a difference for 2 columns but maybe in the future there will be more and this will be worth it.
-- Version
-
+  - Included for user convenience. Their csv file might be missing a header sometimes.
+- Version information
+  - Included so user can see if they have the latest release. Added other information for developers (git hash, go version, build time) in case they are asked to help the user when something is wrong.
 
