@@ -52,7 +52,9 @@ Run `image_compare -h` to see a list of other options you can specify.
 
 ### Flow Chart
 
-![Flow Chart](https://github.com/greg-rychlewski/image-compare/blob/master/_testdata/images/flowchart.png)
+<p align="center"> 
+<img src="https://github.com/greg-rychlewski/image-compare/blob/master/_testdata/images/flowchart.png">
+</p>
 
 1. Validate user input
 2. Read line from csv file
