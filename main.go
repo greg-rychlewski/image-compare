@@ -46,6 +46,7 @@ func main() {
     if err != nil {
         if csvErr, ok := err.(*csvutil.CsvError); ok {
             fmt.Fprintf(os.Stderr, "%s line %d. %s\n", inputPath, csvErr.Row, csvErr.Message)
+            os.Remove(outputPath)
         } else {
             fmt.Fprintln(os.Stderr, err)
         }
