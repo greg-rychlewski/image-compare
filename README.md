@@ -71,11 +71,11 @@ Note: Program exits early if there are any errors that would prohibit the calcul
  
 I allow the user to specify the following flags:
 - Input csv
-..* Required because the program can't do anything without it.
+  - Required because the program can't do anything without it.
 - Output csv
-..* I made this optional for the user's convenience. If this isn't specified then a time-stamped file is created in the current directory. The file is timestamped down to the second to ensure uniqueness. 
+  - I made this optional for the user's convenience. If this isn't specified then a time-stamped file is created in the current directory. The file is timestamped down to the second to ensure uniqueness. 
 - No header in csv file
-..* If this user's csv file is ever missing a header they can just specify this option instead of creating the header themselves. It might not be much of a difference for 2 columns but maybe in the future there will be more and this will be worth it.
+  - If this user's csv file is ever missing a header they can just specify this option instead of creating the header themselves. It might not be much of a difference for 2 columns but maybe in the future there will be more and this will be worth it.
 - Version
 
 
