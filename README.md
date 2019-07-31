@@ -47,3 +47,19 @@ The results will be saved to a file in your current directory.
 You can specify your own output file by adding `-out output_csv_file` to the above commands.
 
 Run `image_compare -h` to see a list of other options you can specify.
+
+## Design 
+
+### Flow Chart
+
+1. Validate user input
+2. Read line from csv file
+3. Validate image paths
+4. Calculate mean squared error for the 2 images
+5. Write results to output csv
+6. Repeat 2-5 until you get to the end of the input csv
+
+Note: Program exits early if there are any errors that would prohibit the calculation of a pair of images.
+
+ 
+
