@@ -45,3 +45,5 @@ Windows CMD
 The results will be saved to a file in your current directory. 
 
 You can specify your own output file by adding `-out output_csv_file` to the above commands.
+
+Run `image_compare -h` to see a list of other options you can specify.
