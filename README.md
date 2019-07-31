@@ -92,5 +92,26 @@ I allow the user to specify the following flags:
 - If the images have different sizes then I shrink the bigger one so that it is equal to the smaller one. I do this because mse is undefined when one of the images is missing a pixel. I chose to scale rather than crop so that we are not ignoring large sections of an image. I chose to scale down rather than up so that we are looping over less pixels when calculating mse. 
 - When calculating mse, I normalize all the rgba values between 0 and 1 to avoid potential overflow. RGBA values in Go are between 0 and 65535 instead of 0 and 255.
 
-### Build Script
+#### Build Script
 
+- The build script contains important metadata such as app version, go version, git hash and build time. This is passed into the app using ldflags so that users can access it through a command-line option.
+- Unit tests are run before building the app to help ensure code quality.
+- The app is built for 32/64-bit Windows and MacOS. These are saved as .tar files for 2 reasons. The first is so I don't have to include os/architecture information in the executable names. That would make it annoying for the users to call them. The second is so the MacOS files retain their executable permissions. If the bare file is downloaded, it will have permissions 644. Archiving it with tar allows the permission metadata to be saved.
+
+#### Dependencies
+
+- I took care to use as little dependencies outside of the Go standard libary as possible. In general, it's harder to make sure those kinds of libraries will be updated and remain compatible as Go evolves. I only used one external library for image resizing.
+- I use Go modules to make sure the information for the one external libary I used is available to other developers.
+
+#### Continuous Integration
+
+- I use Travis CI to run my build script whenever I push to GitHub. I also use it to automatically deploy a release whenever I push a tagged commit.
+
+#### Code Structure
+
+- My philosophy for the code structure was to be as modular as possible and have the main function use those modules. This makes the code more organized and less coupled. This is a pretty small project, but I feel like it's a good idea to start this way from the beginning to avoid a lot of refactoring when the project gets bigger.
+
+#### Opportunities for Improvement
+
+- MSE is calculated by looping through the pixels one at a time. I would like to see if Go has a way to vectorize these operations, like Python's numpy. I've read about the gonum package and would be interested in seeing if it can be used with image data.
+- 
