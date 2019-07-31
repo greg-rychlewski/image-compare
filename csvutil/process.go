@@ -59,7 +59,7 @@ func Process(inputPath string, outputPath string, headerIncluded bool) (int, err
         }
 
         if err != nil {
-            return 0, err
+            return 0, &CsvError{numProcessedPairs + 1, err.Error()}
         }
 
         // If current row is header, skip it
