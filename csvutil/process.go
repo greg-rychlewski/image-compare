@@ -8,7 +8,7 @@ import (
     "strconv"
 )
 
-// Custom error type so that captures the csv row number 
+// Custom error type that captures the csv row number 
 type CsvError struct {
     Row int
     Message string
@@ -42,7 +42,7 @@ func Process(inputPath string, outputPath string, headerIncluded bool) (int, err
     csvReader := csv.NewReader(inputFile)
     csvWriter := csv.NewWriter(outputFile)
 
-    // Writer header to output csv
+    // Write header to output csv
     csvWriter.Write([]string{"image1", "image2", "similarity", "elapsed"})
     csvWriter.Flush()
 
