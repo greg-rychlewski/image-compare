@@ -16,8 +16,8 @@ var isVersionFlagPresent, isNoHeaderFlagPresent bool
 var inputPath, outputPath string
 
 func init() {
-	// Initialize command-line flag information
-	flagutil.InitFlags(&inputPath, &outputPath, &isVersionFlagPresent, &isNoHeaderFlagPresent)
+    // Initialize command-line flag information
+    flagutil.InitFlags(&inputPath, &outputPath, &isVersionFlagPresent, &isNoHeaderFlagPresent)
 }
 
 func main() {
